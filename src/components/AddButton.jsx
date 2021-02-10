@@ -1,13 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { string, shape } from 'prop-types';
 
-export default function AddButton() {
+export default function AddButton(props) {
+  const { children, style } = props;
   return (
-    <View style={styles.addList}>
-      <Text style={styles.addListText}>+</Text>
+    <View style={[styles.addList, style]}>
+      <Text style={styles.addListText}>{children}</Text>
     </View>
   );
 }
+
+AddButton.propTypes = {
+  children: string.isRequired,
+  style: shape(),
+};
+
+AddButton.defaultProps = {
+  style: null,
+};
 
 const styles = StyleSheet.create({
   addList: {

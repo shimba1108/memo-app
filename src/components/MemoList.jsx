@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 
 export default function MemoList() {
   return (
-    <View>
+    <ScrollView>
       <View style={styles.memoListItem}>
         <View>
           <Text style={styles.memoListItemTitle}>買い物リスト</Text>
@@ -40,7 +40,7 @@ export default function MemoList() {
           <Text style={styles.memoListItemDelete}>✕</Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
