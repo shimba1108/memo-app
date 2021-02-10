@@ -1,5 +1,10 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+} from 'react-native';
 
 export default function MemoList() {
   return (

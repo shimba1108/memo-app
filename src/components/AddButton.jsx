@@ -1,19 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { string, shape } from 'prop-types';
+import { Feather } from '@expo/vector-icons';
 
 export default function AddButton(props) {
-  const { children, style } = props;
+  const { style, name } = props;
   return (
     <View style={[styles.addList, style]}>
-      <Text style={styles.addListText}>{children}</Text>
+      <Feather name={name} size={32} color="white" />
     </View>
   );
 }
 
 AddButton.propTypes = {
-  children: string.isRequired,
   style: shape(),
+  name: string.isRequired,
 };
 
 AddButton.defaultProps = {

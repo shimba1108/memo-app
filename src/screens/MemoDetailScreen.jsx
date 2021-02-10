@@ -24,7 +24,7 @@ export default function MemodetailScreen() {
           まず自分が持っている手持ちのカードをきちんと把握し、電車が来るまでの残り時間の中で、足りない条件を揃える必要があります。
         </Text>
       </ScrollView>
-      <AddButton style={{ top: 160, bottom: 'auto' }}>+</AddButton>
+      <AddButton style={{ top: 165, bottom: 'auto' }} name="edit-2" />
     </View>
   );
 }
