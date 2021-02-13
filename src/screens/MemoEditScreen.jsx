@@ -3,20 +3,20 @@ import {
   View,
   TextInput,
   StyleSheet,
-  KeyboardAvoidingView,
 } from 'react-native';
 import AddButton from '../components/AddButton';
 import AppBar from '../components/AppBar';
+import KeyboardSafeView from '../components/keyboardSafeView';
 
 export default function MemoEditScreen() {
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="height">
+    <KeyboardSafeView style={styles.container} behavior="height">
       <AppBar />
       <View style={styles.inputContainer}>
         <TextInput value="買い物リスト" multiline style={styles.input} />
       </View>
       <AddButton name="check" />
-    </KeyboardAvoidingView>
+    </KeyboardSafeView>
   );
 }
 
