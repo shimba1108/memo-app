@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   TextInput,
@@ -10,13 +10,43 @@ import Button from '../components/Button';
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput value="Username" style={styles.input} />
-        <TextInput value="Email" style={styles.input} />
-        <TextInput value="Password" style={styles.input} />
+        <TextInput
+          value={username}
+          style={styles.input}
+          placeholder="Username"
+          onChangeText={(text) => { setUsername(text); }}
+          autoCapitalize="none"
+          keyboardType="default"
+          textContentType="name"
+        />
+        <TextInput
+          value={email}
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => { setEmail(text); }}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+
+        />
+        <TextInput
+          value={password}
+          style={styles.input}
+          placeholder="Password"
+          onChangeText={(text) => { setPassword(text); }}
+          autoCapitalize="none"
+          keyboardType="password"
+          secureTextEntry
+          textContentType="password"
+
+        />
         <Button
           label="SignUp"
           onPress={() => {
@@ -67,7 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: 8,
     marginBottom: 16,
-    color: '#d1d1d1',
+    color: '#141414',
   },
   footerContainer: {
     flexDirection: 'row',
