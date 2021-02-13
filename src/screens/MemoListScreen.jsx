@@ -2,14 +2,16 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import AddButton from '../components/AddButton';
 import MemoList from '../components/MemoList';
-import AppBar from '../components/AppBar';
 
-export default function MemoListScreen() {
+export default function MemoListScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
-      <AppBar />
       <MemoList />
-      <AddButton name="plus" />
+      <AddButton
+        name="plus"
+        onPress={() => { navigation.navigate('MemoCreator'); }}
+      />
     </View>
   );
 }

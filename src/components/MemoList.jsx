@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
   ScrollView,
@@ -8,44 +9,21 @@ import {
 } from 'react-native';
 
 export default function MemoList() {
+  const navigation = useNavigation();
   return (
     <ScrollView>
-      <View style={styles.memoListItem}>
+      <TouchableOpacity
+        style={styles.memoListItem}
+        onPress={() => { navigation.navigate('MemoDetail'); }}
+      >
         <View>
           <Text style={styles.memoListItemTitle}>買い物リスト</Text>
           <Text style={styles.memoListItemDate}>2020/01/01</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.memoDelete}>
           <Text style={styles.memoListItemDelete}>✕</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.memoListItem}>
-        <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-          <Text style={styles.memoListItemDate}>2020/01/01</Text>
-        </View>
-        <TouchableOpacity>
-          <Text style={styles.memoListItemDelete}>✕</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.memoListItem}>
-        <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-          <Text style={styles.memoListItemDate}>2020/01/01</Text>
-        </View>
-        <View>
-          <Text style={styles.memoListItemDelete}>✕</Text>
-        </View>
-      </View>
-      <View style={styles.memoListItem}>
-        <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-          <Text style={styles.memoListItemDate}>2020/01/01</Text>
-        </View>
-        <View>
-          <Text style={styles.memoListItemDelete}>✕</Text>
-        </View>
-      </View>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -74,5 +52,8 @@ const styles = StyleSheet.create({
     lineHeight: 32,
     fontSize: 20,
     color: '#848484',
+  },
+  memoDelete: {
+    padding: 8,
   },
 });

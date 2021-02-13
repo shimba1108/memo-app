@@ -7,12 +7,10 @@ import {
 } from 'react-native';
 import AddButton from '../components/AddButton';
 
-import AppBar from '../components/AppBar';
-
-export default function MemodetailScreen() {
+export default function MemodetailScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.memoHeader}>
         <Text style={styles.memoTitle}>買い物リスト</Text>
         <Text style={styles.memoDate}>2021/01/01</Text>
@@ -24,7 +22,11 @@ export default function MemodetailScreen() {
           まず自分が持っている手持ちのカードをきちんと把握し、電車が来るまでの残り時間の中で、足りない条件を揃える必要があります。
         </Text>
       </ScrollView>
-      <AddButton style={{ top: 165, bottom: 'auto' }} name="edit-2" />
+      <AddButton
+        style={{ top: 62, bottom: 'auto' }}
+        name="edit-2"
+        onPress={() => { navigation.navigate('MemoEdit'); }}
+      />
     </View>
   );
 }
