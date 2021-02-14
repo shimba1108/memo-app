@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import firebase from 'firebase';
 import {
   View,
   TextInput,
@@ -13,6 +14,22 @@ export default function SignUpScreen(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  function handlePress() {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoList' }],
+        });
+      })
+      .catch((error) => {
+        console.log(error.code.error.message);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
@@ -42,19 +59,13 @@ export default function SignUpScreen(props) {
           placeholder="Password"
           onChangeText={(text) => { setPassword(text); }}
           autoCapitalize="none"
-          keyboardType="password"
           secureTextEntry
           textContentType="password"
 
         />
         <Button
           label="SignUp"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'MemoList' }],
-            });
-          }}
+          onPress={handlePress}
         />
         <View style={styles.footerContainer}>
           <Text style={styles.footerText}>Already registered</Text>
