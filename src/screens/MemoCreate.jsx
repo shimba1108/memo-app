@@ -3,6 +3,7 @@ import {
   View,
   TextInput,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import firebase from 'firebase';
 import AddButton from '../components/AddButton';
@@ -24,7 +25,7 @@ export default function MemoCreateScreen(props) {
         navigation.goBack();
       })
       .catch((error) => {
-        console.log('Error', error);
+        Alert.alert(error.code);
       });
   }
   return (
