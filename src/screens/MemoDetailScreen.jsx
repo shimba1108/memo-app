@@ -47,7 +47,7 @@ export default function MemodetailScreen(props) {
       <AddButton
         style={{ top: 62, bottom: 'auto' }}
         name="edit-2"
-        onPress={() => { navigation.navigate('MemoEdit'); }}
+        onPress={() => { navigation.navigate('MemoEdit', { id: memo.id, bodyText: memo.bodyText }); }}
       />
     </View>
   );
