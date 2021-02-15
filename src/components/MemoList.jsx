@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import { dateToString } from '../utils';
 
 export default function MemoList(props) {
   const { memos } = props;
@@ -23,11 +24,11 @@ export default function MemoList(props) {
       <TouchableOpacity
         key={item.id}
         style={styles.memoListItem}
-        onPress={() => { navigation.navigate('MemoDetail'); }}
+        onPress={() => { navigation.navigate('MemoDetail', { id: item.id }); }}
       >
         <View>
           <Text style={styles.memoListItemTitle} numberOfLines={1}>{item.bodyText}</Text>
-          <Text style={styles.memoListItemDate}>{String(item.updatedAt)}</Text>
+          <Text style={styles.memoListItemDate}>{dateToString(item.updatedAt)}</Text>
         </View>
         <TouchableOpacity style={styles.memoDelete}>
           <Text style={styles.memoListItemDelete}>✕</Text>

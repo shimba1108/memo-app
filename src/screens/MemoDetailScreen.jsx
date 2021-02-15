@@ -1,25 +1,47 @@
-import React from 'react';
+import { shape, string } from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   ScrollView,
   StyleSheet,
   Text,
 } from 'react-native';
+import firebase from 'firebase';
 import AddButton from '../components/AddButton';
+import { dateToString } from '../utils';
 
 export default function MemodetailScreen(props) {
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const { id } = route.params;
+  const [memo, setMemo] = useState(null);
+
+  useEffect(() => {
+    const { currentUser } = firebase.auth();
+    let unsubscribe = () => {};
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      unsubscribe = ref.onSnapshot((doc) => {
+        const data = doc.data();
+        setMemo({
+          id: doc.id,
+          bodyText: data.bodyText,
+          updatedAt: data.updatedAt.toDate(),
+        });
+      });
+    }
+    return unsubscribe;
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.memoHeader}>
-        <Text style={styles.memoTitle}>買い物リスト</Text>
-        <Text style={styles.memoDate}>2021/01/01</Text>
+        <Text style={styles.memoTitle} numberOfLines={1}>{memo && memo.bodyText}</Text>
+        <Text style={styles.memoDate}>{memo && dateToString(memo.updatedAt)}</Text>
       </View>
       <ScrollView style={styles.memoBody}>
         <Text style={styles.memoText}>
-          未来が読める「だけ」では価値はないのです。その恩恵にあずかるためには、未来に向かう電車が来るタイミングで、
-          必要なリソースを揃えて、駅のホームで待っていなければなりません。そのためには、
-          まず自分が持っている手持ちのカードをきちんと把握し、電車が来るまでの残り時間の中で、足りない条件を揃える必要があります。
+          {memo && memo.bodyText}
         </Text>
       </ScrollView>
       <AddButton
@@ -30,6 +52,12 @@ export default function MemodetailScreen(props) {
     </View>
   );
 }
+
+MemodetailScreen.propTypes = {
+  route: shape({
+    params: shape({ id: string }),
+  }).isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
